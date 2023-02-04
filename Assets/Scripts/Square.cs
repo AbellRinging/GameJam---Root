@@ -12,19 +12,10 @@ public class Square : MonoBehaviour
             0 = bg
             1 = playerSpawn
             2 = nutrient
-            3 = rock / root
+            3 = rock
             4 = splitter
+            5 = root
         */
-
-    void Awake()
-    {
-
-    }
-
-    void Update()
-    {
-        
-    }
 
     public void UpdateProperties()
     {
@@ -42,6 +33,10 @@ public class Square : MonoBehaviour
                 GetComponent<Image>().color = Color.red;
                 break;
             case 4:
+                GetComponent<Image>().color = Color.black;
+                break;
+            case 5:
+                GetComponent<Image>().color = Color.magenta;
                 break;
         }
     }

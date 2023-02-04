@@ -37,18 +37,32 @@ public class MapManager : MonoBehaviour
                 i++;
             }
         }
-    }
-
-    void Update()
-    {
-        
+        Restart();
     }
 
     public MapLayout Get_Layout(){
         return LayoutList[CurrentLevel];
     }
 
+    /* Stuff related to Grid and level change */
+        public Transform GM;
+        public GameObject GridManagerPrefab;
+
     public void ChangeLevel(){
+        CurrentLevel++;
+        Restart();
+    }
+
+    public void Restart(){
+        if(GM != null){
+            var children = new List<GameObject>();
+            foreach (Transform child in GM) children.Add(child.gameObject);
+            children.ForEach(child => Destroy(child));
+
+            Destroy(GM.gameObject);
+        }  
+        GM = Instantiate(GridManagerPrefab, transform, true).transform;
+        GM.transform.position = new Vector3(transform.position.x, transform.position.y);
 
     }
 }

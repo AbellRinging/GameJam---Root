@@ -20,7 +20,8 @@ menu tem 2 botões, continuar e sair
 
 // MAP
 0 = bg
-1 = playerSpawn
+1 = player
 2 = nutrient
-3 = rock / root
+3 = rock
 4 = splitter
+5 = root

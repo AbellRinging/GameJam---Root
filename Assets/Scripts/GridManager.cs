@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class GridManager : MonoBehaviour
 {
-    public int[,] Grid;
+    public Square [,] Grid;
     private float float_SquareWidth;
 
     /* Size of playable area is a square (BOTH COLUMNS AND ROWS)*/
@@ -19,17 +19,21 @@ public class GridManager : MonoBehaviour
 
     /* Variable that helps Spawning Squares in the right position*/
         private float SpawnPositioner;
+
+    MapManager MM;
+    Player PlayerScript;
     
     void Start()
     {
         if (SquareObject == null) Debug.LogError("Missing Square Prefab");
         if (Size % 2 == 0) Debug.LogError("Size is not odd");
 
-
-        MapManager.MapLayout layout = transform.GetComponentInParent<MapManager>().Get_Layout();
+        MM = transform.GetComponentInParent<MapManager>();
+        PlayerScript = transform.GetComponentInParent<Player>();
+        MapManager.MapLayout layout = MM.Get_Layout();
         Size = layout.size;
 
-        Grid = new int [Size,Size];
+        Grid = new Square [Size,Size];
 
         // Resize Playable Area to be as big as Grid
         float_SquareWidth = SquareObject.GetComponent<RectTransform>().rect.width;
@@ -40,6 +44,8 @@ public class GridManager : MonoBehaviour
 
         //Place the Squares
         PlaceSquares(layout.map);
+
+        PlayerScript.Grid = Grid;
     }
 
     private void PlaceSquares(int[] map)
@@ -61,5 +67,15 @@ public class GridManager : MonoBehaviour
         Square temp = Square.GetComponent<Square>();
         temp.Type = type;
         temp.UpdateProperties();
+
+        Grid[x,y] = temp;
+
+        if(type == 1){
+            PlayerScript.CurrentLocation(x, y);
+        }
+        else if (type == 2){
+            PlayerScript.NutrientsLeft(true);
+        }
+
     }
 }
