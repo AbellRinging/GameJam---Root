@@ -1,0 +1,26 @@
+Roots
+
+raiz expante gradualmente
+grelha da movimentação é 7x7
+controla direção que a raiz vai expandir com as setas ou wasd
+a raiz anda em linha reta até bater em algum obstaculo
+
+
+a raiz começa de um ponto fixo(semente) e procura os nutrientes no subsolo
+so acabaa fase depois de coletar todos os nutrientes
+a raiz pode colidir com pedras e ela mesma
+
+quando a raiz passar por um node, o jogador pode escolher criar uma branch
+mudar controle entre branchs com a tecla Space
+
+reinicia o jogo com R
+
+ativa o menu com ESC para pausar o jogo
+menu tem 2 botões, continuar e sair
+
+// MAP
+0 = bg
+1 = playerSpawn
+2 = nutrient
+3 = rock / root
+4 = splitter
