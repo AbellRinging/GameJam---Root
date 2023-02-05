@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MapManager : MonoBehaviour
 {
@@ -13,8 +14,6 @@ public class MapManager : MonoBehaviour
         public int[] map;
     }
 
-    public int NumberOfMaps = 20;
-
     private MapLayout[] LayoutList;
 
     /* The file with all of the map layouts */
@@ -24,10 +23,10 @@ public class MapManager : MonoBehaviour
 
     void Awake()
     {
-        LayoutList = new MapLayout[NumberOfMaps];
 
         MapLayout[] dictionary = JsonConvert.DeserializeObject<MapLayout[]>(jsonFile.text);
-        
+        LayoutList = new MapLayout[dictionary.GetLength(0)];
+
         int i = 0;
 
         foreach (MapLayout layout in dictionary)
@@ -50,6 +49,10 @@ public class MapManager : MonoBehaviour
 
     public void ChangeLevel(){
         CurrentLevel++;
+        if (CurrentLevel > LayoutList.GetLength(0) - 1) {
+            SceneManager.LoadScene(2);
+            return;
+        }
         Restart();
     }
 

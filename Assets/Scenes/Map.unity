@@ -381,7 +381,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 715f9312ac7fa324eb7819b08e33bb10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NumberOfMaps: 20
   jsonFile: {fileID: 4900000, guid: 8cc64d4f4825ce94d9b86944448a0cad, type: 3}
   GM: {fileID: 0}
   GridManagerPrefab: {fileID: 2244029051251809090, guid: 4ea2cfa1d4d51314a812bff6e163f268, type: 3}
@@ -397,6 +396,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3b371dd42c720a4494bc033dac382fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Speed: 0.15
 --- !u!1 &1918033790
 GameObject:
   m_ObjectHideFlags: 0

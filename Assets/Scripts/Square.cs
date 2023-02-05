@@ -6,16 +6,24 @@ using UnityEngine.UI;
 public class Square : MonoBehaviour
 {
     public int Type = 0;
-
-    public Image[] SquareSprite;
         /*
             0 = bg
-            1 = playerSpawn
+            1 = player
             2 = nutrient
             3 = rock
             4 = splitter
             5 = root
         */
+
+    public Image[] PlayerSprites;
+
+    public Image RockSprite;
+
+    public Image NutrientSprite;
+
+    public Image SplitterSprite;
+
+    public Image[] RootSprites;
 
     public void UpdateProperties()
     {

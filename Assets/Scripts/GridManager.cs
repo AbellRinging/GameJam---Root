@@ -72,6 +72,7 @@ public class GridManager : MonoBehaviour
 
         if(type == 1){
             PlayerScript.CurrentLocation(x, y);
+            PlayerScript.GlowHighlight(Square.transform.position);
         }
         else if (type == 2){
             PlayerScript.NutrientsLeft(true);

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -19,26 +20,28 @@ public class Player : MonoBehaviour
 
     private string Direction;
 
+    public float Speed = 0.2f;
+
     // Update is called once per frame
     void Update()
     {
         if(!IsMoving){
-            if (Input.GetKeyDown(KeyCode.W)){
+            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)){
                 Direction = "N";
                 IsMoving = true;
 
             }
-            else if (Input.GetKeyDown(KeyCode.A)){
+            else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)){
                 Direction = "W";
                 IsMoving = true;
 
             }
-            else if (Input.GetKeyDown(KeyCode.S)){
+            else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)){
                 Direction = "S";
                 IsMoving = true;
 
             }
-            else if (Input.GetKeyDown(KeyCode.D)){
+            else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)){
                 Direction = "E";
                 IsMoving = true;
 
@@ -111,7 +114,7 @@ public class Player : MonoBehaviour
     private bool CoroutineBool = true;
     IEnumerator Moving(){
         CoroutineBool = false;
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(Speed);
         CoroutineBool = true;
     }
 
@@ -150,5 +153,26 @@ public class Player : MonoBehaviour
                 IsMoving = false;
             } 
         }
+    }
+
+    /* CHANGE USER */
+    public List<Square> PlayerSquares;
+    private int ActivePlayer = 0;
+
+
+    /* SOME VISUAL ELEMENTS */
+
+    public GameObject Highlight;
+    public Image Image_Highlight;
+
+    public void GlowHighlight(Vector3 Pos){
+        Highlight.transform.position = Pos;
+        StartCoroutine(Glow());
+    }
+
+    IEnumerator Glow(){
+        Image_Highlight.color = new Color(1f,1f,1f,1f);
+        yield return new WaitForSeconds (0.2f);
+        Image_Highlight.color = new Color(1f,1f,1f,0f);
     }
 }
