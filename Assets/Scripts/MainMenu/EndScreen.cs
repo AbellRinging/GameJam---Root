@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 public class EndScreen : MonoBehaviour
 {
     public void GoToMenu(){
-        SceneManager.LoadScene(0);
+        //SceneManager.LoadScene(0);
+        Debug.Log("Game has quit");
+        Application.Quit();
     }
 }
