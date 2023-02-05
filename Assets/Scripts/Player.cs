@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        PlayerSquares = new List<Tuple>();
         MM = transform.GetComponent<MapManager>();
     }
 
@@ -46,15 +47,22 @@ public class Player : MonoBehaviour
                 IsMoving = true;
 
             }
+            else if (Input.GetKeyDown(KeyCode.Space))
+            {
+                ChangePlayer();
+            }
+
+            /* Debugging? */
+
             else if(Input.GetKeyDown(KeyCode.R))
             {
-                Grid = null;
+                ClearData();
                 MM.Restart();
                 NutrientsRemaining = 0;
             }
             else if (Input.GetKeyDown(KeyCode.C))
             {
-                Grid = null;
+                ClearData();
                 MM.ChangeLevel();
                 NutrientsRemaining = 0;
             }
@@ -64,44 +72,68 @@ public class Player : MonoBehaviour
                 switch(Direction){
                     case "N":
                         if(CheckNextSquare(Coordinate_X, Coordinate_Y + 1)){
+                            if(StopMoving){
+                                StopMoving = false;
+                                return;
+                            }
                             Grid[Coordinate_X, Coordinate_Y].Type = 5;
                             Grid[Coordinate_X, Coordinate_Y].UpdateProperties();
                             CurrentLocation(Coordinate_X, Coordinate_Y + 1);
                             Grid[Coordinate_X, Coordinate_Y].Type = 1;
                             Grid[Coordinate_X, Coordinate_Y].UpdateProperties();
+                            PlayerSquares[ActivePlayer].x = Coordinate_X;
+                            PlayerSquares[ActivePlayer].y = Coordinate_Y;
                             CoroutineIsMoving = StartCoroutine(Moving());
                         }
 
                         break;
                     case "W":
                         if(CheckNextSquare(Coordinate_X - 1, Coordinate_Y)){
+                            if(StopMoving){
+                                StopMoving = false;
+                                return;
+                            }
                             Grid[Coordinate_X, Coordinate_Y].Type = 5;
                             Grid[Coordinate_X, Coordinate_Y].UpdateProperties();
                             CurrentLocation(Coordinate_X - 1, Coordinate_Y);
                             Grid[Coordinate_X, Coordinate_Y].Type = 1;
                             Grid[Coordinate_X, Coordinate_Y].UpdateProperties();
+                            PlayerSquares[ActivePlayer].x = Coordinate_X;
+                            PlayerSquares[ActivePlayer].y = Coordinate_Y;
                             CoroutineIsMoving = StartCoroutine(Moving());
                         }
 
                         break;
                     case "S":
                         if(CheckNextSquare(Coordinate_X, Coordinate_Y - 1)){
+                            if(StopMoving){
+                                StopMoving = false;
+                                return;
+                            }
                             Grid[Coordinate_X, Coordinate_Y].Type = 5;
                             Grid[Coordinate_X, Coordinate_Y].UpdateProperties();
                             CurrentLocation(Coordinate_X, Coordinate_Y - 1);
                             Grid[Coordinate_X, Coordinate_Y].Type = 1;
                             Grid[Coordinate_X, Coordinate_Y].UpdateProperties();
+                            PlayerSquares[ActivePlayer].x = Coordinate_X;
+                            PlayerSquares[ActivePlayer].y = Coordinate_Y;
                             CoroutineIsMoving = StartCoroutine(Moving());
                         }
 
                         break;
                     case "E":
                         if(CheckNextSquare(Coordinate_X + 1, Coordinate_Y)){
+                            if(StopMoving){
+                                StopMoving = false;
+                                return;
+                            }
                             Grid[Coordinate_X, Coordinate_Y].Type = 5;
                             Grid[Coordinate_X, Coordinate_Y].UpdateProperties();
                             CurrentLocation(Coordinate_X + 1, Coordinate_Y);
                             Grid[Coordinate_X, Coordinate_Y].Type = 1;
                             Grid[Coordinate_X, Coordinate_Y].UpdateProperties();
+                            PlayerSquares[ActivePlayer].x = Coordinate_X;
+                            PlayerSquares[ActivePlayer].y = Coordinate_Y;
                             CoroutineIsMoving = StartCoroutine(Moving());
                         }
 
@@ -128,6 +160,7 @@ public class Player : MonoBehaviour
         if (x >= 0 && x < Grid.GetLength(0) && y >= 0 && y < Grid.GetLength(0)){
             if (Grid[x,y].Type != 3 && Grid[x,y].Type != 5){
                 if(Grid[x,y].Type == 2) NutrientsLeft(false);
+                else if (Grid[x,y].Type == 4) AddPlayer(x,y);
                 return true;
             }
             else{
@@ -143,12 +176,15 @@ public class Player : MonoBehaviour
 
     private int NutrientsRemaining = 0;
 
+    bool StopMoving = false;
     public void NutrientsLeft(bool increase){
         if (increase){
             NutrientsRemaining++;
         }else{
             NutrientsRemaining--;
             if(NutrientsRemaining == 0){
+                StopMoving = true;
+                ClearData();
                 MM.ChangeLevel();
                 IsMoving = false;
             } 
@@ -156,9 +192,46 @@ public class Player : MonoBehaviour
     }
 
     /* CHANGE USER */
-    public List<Square> PlayerSquares;
+    public class Tuple{
+        public int x;
+        public int y;
+    }
+
+    public List<Tuple> PlayerSquares;
     private int ActivePlayer = 0;
 
+    public void ChangePlayer(){
+        int x;
+        int y;
+
+        if(PlayerSquares.Count> ActivePlayer + 1){
+            ActivePlayer++;
+            x = PlayerSquares[ActivePlayer].x;
+            y = PlayerSquares[ActivePlayer].y;
+        }
+        else{
+            ActivePlayer = 0;
+            x = PlayerSquares[ActivePlayer].x;
+            y = PlayerSquares[ActivePlayer].y;
+        }
+
+        CurrentLocation(x, y);
+        GlowHighlight(Grid[x, y].transform.position);
+    }
+
+    public void AddPlayer(int x, int y){
+        Tuple tuple = new Tuple();
+        tuple.x = x;
+        tuple.y = y;
+
+        PlayerSquares.Add(tuple);
+    }
+
+    public void ClearData(){
+        Grid = null;
+        ActivePlayer = 0;
+        PlayerSquares.Clear();
+    }
 
     /* SOME VISUAL ELEMENTS */
 

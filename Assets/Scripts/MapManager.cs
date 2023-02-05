@@ -56,7 +56,7 @@ public class MapManager : MonoBehaviour
         Restart();
     }
 
-    public void Restart(){
+    public void Restart(){       
         if(GM != null){
             var children = new List<GameObject>();
             foreach (Transform child in GM) children.Add(child.gameObject);
@@ -66,6 +66,5 @@ public class MapManager : MonoBehaviour
         }  
         GM = Instantiate(GridManagerPrefab, transform, true).transform;
         GM.transform.position = new Vector3(transform.position.x, transform.position.y);
-
     }
 }
