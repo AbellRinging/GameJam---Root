@@ -728,6 +728,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3b371dd42c720a4494bc033dac382fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SFX: {fileID: 0}
   Speed: 0.15
   Highlight: {fileID: 318646918}
   Image_Highlight: {fileID: 318646919}
@@ -746,7 +747,7 @@ MonoBehaviour:
   CollisionSFX: {fileID: 833871824}
   EndSFX: {fileID: 1017778671}
   NutrientSFX: {fileID: 1276025247}
-  MovementSFX: {fileID: 1276025247}
+  MovementSFX: {fileID: 1317569287}
   UIBack: {fileID: 0}
   UIClick: {fileID: 0}
   UIHover: {fileID: 0}

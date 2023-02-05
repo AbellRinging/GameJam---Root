@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
 
     private Coroutine CoroutineIsMoving;
 
-    SFX_Manager SFX;
+    public SFX_Manager SFX;
 
 
     // Start is called before the first frame update
@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
     {
         PlayerSquares = new List<Tuple>();
         MM = transform.GetComponent<MapManager>();
+        SFX = GetComponent<SFX_Manager>();
     }
 
     private string Direction;
@@ -33,26 +34,30 @@ public class Player : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)){
                 Direction = "N";
                 IsMoving = true;
-                SFX.PlayCollisionSFX();
+                SFX.PlayNutrientSFX();
             }
             else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)){
                 Direction = "W";
                 IsMoving = true;
+                SFX.PlayNutrientSFX();
 
             }
             else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)){
                 Direction = "S";
                 IsMoving = true;
+                SFX.PlayNutrientSFX();
 
             }
             else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)){
                 Direction = "E";
                 IsMoving = true;
+                SFX.PlayNutrientSFX();
 
             }
             else if (Input.GetKeyDown(KeyCode.Space))
             {
                 ChangePlayer();
+                SFX.PlayNutrientSFX();
             }
 
             /* Debugging? */
@@ -62,6 +67,7 @@ public class Player : MonoBehaviour
                 ClearData();
                 MM.Restart();
                 NutrientsRemaining = 0;
+                SFX.PlayCollisionSFX();
             }
             else if (Input.GetKeyDown(KeyCode.C))
             {
@@ -168,11 +174,13 @@ public class Player : MonoBehaviour
             }
             else{
                 IsMoving = false;
+                SFX.PlayCollisionSFX();
                 return false;
             }
         }
         else{
             IsMoving = false;
+            SFX.PlayCollisionSFX();
             return false;
         }
     }
@@ -181,6 +189,9 @@ public class Player : MonoBehaviour
 
     bool StopMoving = false;
     public void NutrientsLeft(bool increase){
+        
+        SFX.PlayNutrientSFX();
+
         if (increase){
             NutrientsRemaining++;
         }else{
@@ -190,6 +201,8 @@ public class Player : MonoBehaviour
                 ClearData();
                 MM.ChangeLevel();
                 IsMoving = false;
+                SFX.PlayCollisionSFX();
+
             } 
         }
     }
