@@ -34,30 +34,30 @@ public class Player : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)){
                 Direction = "N";
                 IsMoving = true;
-                SFX.PlayNutrientSFX();
+                SFX.PlayUIClick();
             }
             else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)){
                 Direction = "W";
                 IsMoving = true;
-                SFX.PlayNutrientSFX();
+                SFX.PlayUIBack();
 
             }
             else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)){
                 Direction = "S";
                 IsMoving = true;
-                SFX.PlayNutrientSFX();
+                SFX.PlayUIClick();
 
             }
             else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)){
                 Direction = "E";
                 IsMoving = true;
-                SFX.PlayNutrientSFX();
+                SFX.PlayUIHover();
 
             }
             else if (Input.GetKeyDown(KeyCode.Space))
             {
                 ChangePlayer();
-                SFX.PlayNutrientSFX();
+                SFX.PlayUIBack();
             }
 
             /* Debugging? */
