@@ -46,6 +46,8 @@ public class GridManager : MonoBehaviour
         PlaceSquares(layout.map);
 
         PlayerScript.Grid = Grid;
+        PlayerScript.AddPlayer(StartingCoordinates.x,StartingCoordinates.y);
+        PlayerScript.ChangePlayer();
     }
 
     private void PlaceSquares(int[] map)
@@ -59,6 +61,8 @@ public class GridManager : MonoBehaviour
         }
     }
 
+    private (int x, int y) StartingCoordinates;
+
     private void SpawnTile (int x, int y, int type)
     {
         GameObject Square = Instantiate(SquareObject, transform, true);
@@ -71,8 +75,10 @@ public class GridManager : MonoBehaviour
         Grid[x,y] = temp;
 
         if(type == 1){
-            PlayerScript.CurrentLocation(x, y);
-            PlayerScript.GlowHighlight(Square.transform.position);
+            // PlayerScript.CurrentLocation(x, y);
+            // PlayerScript.GlowHighlight(Square.transform.position);
+            StartingCoordinates.x = x;
+            StartingCoordinates.y = y;
         }
         else if (type == 2){
             PlayerScript.NutrientsLeft(true);
