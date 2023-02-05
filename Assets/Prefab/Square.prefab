@@ -92,14 +92,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: 0
   PlayerSprites:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  RockSprite: {fileID: 0}
-  NutrientSprite: {fileID: 0}
-  SplitterSprite: {fileID: 0}
-  RootSprites: []
+  - {fileID: 21300000, guid: 2198e39ade30ed947b2f6218416202eb, type: 3}
+  - {fileID: 21300000, guid: 736040f5e308d954e9bd5a77b4ec88c5, type: 3}
+  - {fileID: 21300000, guid: 735cf270cdf8f564c8181e94a9b2e30c, type: 3}
+  - {fileID: 21300000, guid: 0fd7b13a8b0906f4bb87cb24f323d19a, type: 3}
+  RockSprite: {fileID: 21300000, guid: 5e53ac5537e13e341a48bac5c34e2908, type: 3}
+  NutrientSprite: {fileID: 21300000, guid: 2db8955e9b4922b49bb342a12b22000c, type: 3}
+  SplitterSprite: {fileID: 21300000, guid: d0593857d7fcf0642b48a8be145818eb, type: 3}
+  RootSprites:
+  - {fileID: 21300000, guid: dac7905bc3919444f80058dd6e10a6bb, type: 3}
+  - {fileID: 21300000, guid: d8ee849f2e179ec448372b7aedacdefe, type: 3}
+  - {fileID: 21300000, guid: 24921dc2d548f6c41a371d2e103486d7, type: 3}
+  - {fileID: 21300000, guid: 55a4699d6d151c648a5609a41771be07, type: 3}
+  - {fileID: 21300000, guid: bc35f18db5554c7489b0e9a36fc03c5a, type: 3}
+  - {fileID: 21300000, guid: 6e20b18733533544e8f7f92b213e56bf, type: 3}
 --- !u!82 &8166842227702417989
 AudioSource:
   m_ObjectHideFlags: 0

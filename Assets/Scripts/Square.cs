@@ -15,51 +15,80 @@ public class Square : MonoBehaviour
             5 = root
         */
 
+    public string orientationAtOrigin = "N/A";
+
     public Sprite[] PlayerSprites;
 
-    public Image RockSprite;
+    public Sprite RockSprite;
 
-    public Image NutrientSprite;
+    public Sprite NutrientSprite;
 
-    public Image SplitterSprite;
+    public Sprite SplitterSprite;
 
-    public Image[] RootSprites;
+    public Sprite[] RootSprites;
 
     public void UpdateProperties(string orientation)
     {
         Image temp = GetComponent<Image>();
         temp.color = new Color(1f,1f,1f,1f);
+        Debug.Log(Type + " " + orientation);
         switch(Type){
             case 0:
                 temp.color = Color.clear;
                 break;
             case 1:
+                if(orientation == "N/A"){
+                    temp.sprite = PlayerSprites[2];
+                    orientationAtOrigin = "S";
+                }
                 switch(orientation){
                     case "N":
                         temp.sprite = PlayerSprites[0];
                         break;
-                    case "A":
+                    case "W":
                         temp.sprite = PlayerSprites[1];
                         break;
                     case "S":
                         temp.sprite = PlayerSprites[2];
                         break;
-                    case "D":
+                    case "E":
                         temp.sprite = PlayerSprites[3];
                         break;
                 }
+                orientationAtOrigin = orientation;
                 break;
             case 2:
-                temp.color = Color.blue;
+                temp.sprite = NutrientSprite;
                 break;
             case 3:
-                temp.color = Color.red;
+                temp.sprite = RockSprite;
                 break;
             case 4:
-                temp.color = Color.black;
+                temp.sprite = SplitterSprite;
                 break;
             case 5:
-                temp.color = Color.magenta;
+                switch(orientation){
+                    case "N":
+                        if (orientationAtOrigin == "N") temp.sprite = RootSprites[0];
+                        else if (orientationAtOrigin == "W") temp.sprite = RootSprites[5];
+                        else if (orientationAtOrigin == "E") temp.sprite = RootSprites[2];
+                        break;
+                    case "W":
+                        if (orientationAtOrigin == "W") temp.sprite = RootSprites[1];
+                        else if (orientationAtOrigin == "N") temp.sprite = RootSprites[3];
+                        else if (orientationAtOrigin == "S") temp.sprite = RootSprites[2];
+                        break;
+                    case "S":
+                        if (orientationAtOrigin == "S") temp.sprite = RootSprites[0];
+                        else if (orientationAtOrigin == "W") temp.sprite = RootSprites[4];
+                        else if (orientationAtOrigin == "E") temp.sprite = RootSprites[3];
+                        break;
+                    case "E":
+                        if (orientationAtOrigin == "E") temp.sprite = RootSprites[1];
+                        else if (orientationAtOrigin == "N") temp.sprite = RootSprites[4];
+                        else if (orientationAtOrigin == "S") temp.sprite = RootSprites[5];
+                        break;
+                }
                 break;
         }
     }
