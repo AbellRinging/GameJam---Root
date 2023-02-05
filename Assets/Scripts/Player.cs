@@ -12,6 +12,9 @@ public class Player : MonoBehaviour
 
     private Coroutine CoroutineIsMoving;
 
+    SFX_Manager SFX;
+
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -30,7 +33,7 @@ public class Player : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)){
                 Direction = "N";
                 IsMoving = true;
-
+                SFX.PlayCollisionSFX();
             }
             else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)){
                 Direction = "W";
