@@ -91,7 +91,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 0
-  PlayerSprites: []
+  PlayerSprites:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   RockSprite: {fileID: 0}
   NutrientSprite: {fileID: 0}
   SplitterSprite: {fileID: 0}

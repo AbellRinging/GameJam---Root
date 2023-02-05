@@ -70,7 +70,7 @@ public class GridManager : MonoBehaviour
 
         Square temp = Square.GetComponent<Square>();
         temp.Type = type;
-        temp.UpdateProperties();
+        temp.UpdateProperties("S");
 
         Grid[x,y] = temp;
 

@@ -15,7 +15,7 @@ public class Square : MonoBehaviour
             5 = root
         */
 
-    public Image[] PlayerSprites;
+    public Sprite[] PlayerSprites;
 
     public Image RockSprite;
 
@@ -25,26 +25,41 @@ public class Square : MonoBehaviour
 
     public Image[] RootSprites;
 
-    public void UpdateProperties()
+    public void UpdateProperties(string orientation)
     {
+        Image temp = GetComponent<Image>();
+        temp.color = new Color(1f,1f,1f,1f);
         switch(Type){
             case 0:
-                GetComponent<Image>().color = Color.clear;
+                temp.color = Color.clear;
                 break;
             case 1:
-                GetComponent<Image>().color = Color.green;
+                switch(orientation){
+                    case "N":
+                        temp.sprite = PlayerSprites[0];
+                        break;
+                    case "A":
+                        temp.sprite = PlayerSprites[1];
+                        break;
+                    case "S":
+                        temp.sprite = PlayerSprites[2];
+                        break;
+                    case "D":
+                        temp.sprite = PlayerSprites[3];
+                        break;
+                }
                 break;
             case 2:
-                GetComponent<Image>().color = Color.blue;
+                temp.color = Color.blue;
                 break;
             case 3:
-                GetComponent<Image>().color = Color.red;
+                temp.color = Color.red;
                 break;
             case 4:
-                GetComponent<Image>().color = Color.black;
+                temp.color = Color.black;
                 break;
             case 5:
-                GetComponent<Image>().color = Color.magenta;
+                temp.color = Color.magenta;
                 break;
         }
     }
